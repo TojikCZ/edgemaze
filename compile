@@ -1,0 +1,2 @@
+#!/bin/bash
+cython -3 edgemaze.pyx --annotate && python setup.py build_ext --inplace && python -m pytest -v . 

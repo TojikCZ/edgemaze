@@ -1,0 +1,4 @@
+cython
+pytest
+pytest-timeout
+numpy

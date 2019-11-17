@@ -59,19 +59,14 @@ class Solver:
 
     def can_go_there(self, expanding, adjacent):
         if self.coord_valid(*adjacent):
-            if expanding[0] < adjacent[0]:
-                return self.maze[adjacent] & 4 == 0
-            elif expanding[0] > adjacent[0]:
-                return self.maze[expanding] & 4 == 0
-            elif expanding[1] < adjacent[1]:
-                return self.maze[adjacent] & 2 == 0
-            elif expanding[1] > adjacent[1]:
-                return self.maze[expanding] & 2 == 0
+            for i in range(2):
+                if expanding[i] != adjacent[i]:
+                    return self.maze[max(adjacent, expanding, key=lambda item: item[i])] & (4 - 2*i) == 0
         else:
             return False
 
-    def coord_valid(self, x, y):
-        return 0 <= x < self.maze.shape[0] and 0 <= y < self.maze.shape[1]
+    def coord_valid(self, y, x):
+        return 0 <= y < self.maze.shape[0] and 0 <= x < self.maze.shape[1]
 
 
 def analyze(maze):
